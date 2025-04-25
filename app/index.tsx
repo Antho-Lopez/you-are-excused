@@ -4,6 +4,7 @@ import colors from '@/constants/colors';
 import { excusesBilingue } from '@/constants/excuses';
 import i18n from '@/utils/i18n';
 import { useTranslation } from 'react-i18next';
+import { Link } from "expo-router";
 
 export default function Index() {
   const [excuse, setExcuse] = useState('');
@@ -29,6 +30,14 @@ export default function Index() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      
+      <Link style={styles.bmac} href="https://buymeacoffee.com/antholopez">
+        <Image
+          source={require('@/assets/images/buy-me-a-coffee.png')}
+          style={styles.bmacImage}
+        />
+      </Link>
+
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image
@@ -40,9 +49,12 @@ export default function Index() {
         <View style={styles.contentContainer}>
           
           <Text style={styles.title}>{t('title')}</Text>
-          <Text style={styles.excuse}>
-            {excuse || t('placeholder')}
-          </Text>
+          
+          <View style={styles.excuseContainer}>
+            <Text style={styles.excuse}>
+              {excuse || t('placeholder')}
+            </Text>
+          </View>
 
           <TouchableOpacity
             style={[styles.button, { transform: [{ scale }] }]} 
@@ -64,6 +76,14 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: colors.darkBlue,
+  },
+  bmac: {
+    alignSelf: 'flex-end',
+    marginRight: 20,
+  },
+  bmacImage : {
+    width: 50,
+    height: 50,
   },
   container: {
     flex: 1,
@@ -103,10 +123,13 @@ const styles = StyleSheet.create({
     textShadowRadius: 5,
     textShadowOffset: { width: -2, height: 4 },
   },
+  excuseContainer: {
+    height: 150,
+  },
   excuse: {
     marginTop: 20,
     fontSize: 24,
-    height: 70,
+    height: 'auto',
     textAlign: 'center',
     fontFamily: 'LuckiestGuy',
     color: 'white',
