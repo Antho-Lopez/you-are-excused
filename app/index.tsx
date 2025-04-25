@@ -3,10 +3,12 @@ import { Text, View, StyleSheet, SafeAreaView, Image, TouchableOpacity } from "r
 import colors from '@/constants/colors';
 import { excusesBilingue } from '@/constants/excuses';
 import i18n from '@/utils/i18n';
+import { useTranslation } from 'react-i18next';
 
 export default function Index() {
   const [excuse, setExcuse] = useState('');
   const [scale, setScale] = useState(1);
+  const { t } = useTranslation();
 
   const handlePressIn = () => {
     setScale(0.90);
@@ -37,8 +39,10 @@ export default function Index() {
 
         <View style={styles.contentContainer}>
           
-          <Text style={styles.title}>Trouve ton excuse</Text>
-          <Text style={styles.excuse}>{excuse}</Text>
+          <Text style={styles.title}>{t('title')}</Text>
+          <Text style={styles.excuse}>
+            {excuse || t('placeholder')}
+          </Text>
 
           <TouchableOpacity
             style={[styles.button, { transform: [{ scale }] }]} 
@@ -47,7 +51,7 @@ export default function Index() {
             onPressOut={handlePressOut} 
             activeOpacity={0.7}
           >
-            <Text style={styles.buttonText}>Générer une excuse</Text>
+            <Text style={styles.buttonText}>{t('buttonText')}</Text>
           </TouchableOpacity>
 
         </View>
@@ -117,12 +121,12 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingHorizontal: 30,
     paddingVertical: 15,
-    elevation: 5, // Ombre du bouton pour effet de levée
+    elevation: 5,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.25,
     shadowRadius: 5,
-    // Effet d'enfoncement au clic
+    width: '100%',
     transform: [{ scale: 1 }],
   },
   buttonText: {
