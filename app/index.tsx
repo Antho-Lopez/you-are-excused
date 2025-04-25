@@ -1,26 +1,56 @@
+import React, { useState } from "react";
 import { Text, View, StyleSheet, SafeAreaView, Image, TouchableOpacity } from "react-native";
 import colors from '@/constants/colors';
+import { excusesBilingue } from '@/constants/excuses';
+import i18n from '@/utils/i18n';
 
 export default function Index() {
+  const [excuse, setExcuse] = useState('');
+  const [scale, setScale] = useState(1);
+
+  const handlePressIn = () => {
+    setScale(0.90);
+  };
+  
+  const handlePressOut = () => {
+    setScale(1);
+  };
+
+  const generateRandomExcuse = () => {
+
+    const randomIndex = Math.floor(Math.random() * excusesBilingue.length);
+    const randomExcuse = excusesBilingue[randomIndex];
+    const currentExcuse = i18n.language === 'fr' ? randomExcuse.fr : randomExcuse.en;
+    setExcuse(currentExcuse);
+
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        
         <View style={styles.imageContainer}>
           <Image
-              source={require('@/assets/images/logo.png')}
-              style={styles.image}
+            source={require('@/assets/images/logo.png')}
+            style={styles.image}
           />
         </View>
 
         <View style={styles.contentContainer}>
+          
           <Text style={styles.title}>Trouve ton excuse</Text>
-          <Text style={styles.excuse}>L'excuse générée</Text>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>test</Text>
-          </TouchableOpacity>
-        </View>
+          <Text style={styles.excuse}>{excuse}</Text>
 
+          <TouchableOpacity
+            style={[styles.button, { transform: [{ scale }] }]} 
+            onPress={generateRandomExcuse}
+            onPressIn={handlePressIn} 
+            onPressOut={handlePressOut} 
+            activeOpacity={0.7}
+          >
+            <Text style={styles.buttonText}>Générer une excuse</Text>
+          </TouchableOpacity>
+
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -32,58 +62,76 @@ const styles = StyleSheet.create({
     backgroundColor: colors.darkBlue,
   },
   container: {
-    height: '80%',
+    flex: 1,
     margin: 20,
-    alignContent: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   imageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 12,
+    marginBottom: 40,
   },
   image: {
-    width: 200,
-    height: 200,
-    borderRadius: 25,
+    width: 180,
+    height: 180,
+    borderRadius: 20,
+    borderWidth: 4,
+    borderColor: colors.yellow,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.25,
+    shadowRadius: 5,
+    elevation: 5,
   },
   contentContainer: {
-    marginTop: 60,
-    alignContent: 'center',
+    alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 20,
   },
   title: {
-    fontSize: 30,
+    fontSize: 35,
     textAlign: 'center',
     fontFamily: 'LuckiestGuy',
     color: colors.yellow,
+    marginBottom: 20,
     textShadowColor: 'black',
-    textShadowRadius: 3,
-    textShadowOffset: { width: -3, height: 4 },
+    textShadowRadius: 5,
+    textShadowOffset: { width: -2, height: 4 },
   },
   excuse: {
     marginTop: 20,
     fontSize: 24,
+    height: 70,
     textAlign: 'center',
     fontFamily: 'LuckiestGuy',
-    color: colors.yellow,
+    color: 'white',
+    paddingHorizontal: 30,
+    marginBottom: 40,
     textShadowColor: 'black',
-    textShadowRadius: 3,
-    textShadowOffset: { width: -3, height: 4 },
+    textShadowRadius: 5,
+    textShadowOffset: { width: -2, height: 4 },
   },
   button: {
-    marginTop: 20,
     backgroundColor: colors.red,
     borderRadius: 25,
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    elevation: 5, // Ombre du bouton pour effet de levée
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.25,
+    shadowRadius: 5,
+    // Effet d'enfoncement au clic
+    transform: [{ scale: 1 }],
   },
   buttonText: {
-    padding: 10,
-    textAlign: 'center',
-    fontSize: 30,
+    fontSize: 24,
     fontFamily: 'LuckiestGuy',
-    color: colors.yellow,
+    color: 'white',
+    textAlign: 'center',
     textShadowColor: 'black',
-    textShadowRadius: 1,
-    textShadowOffset: { width: -3, height: 4 },
-  }
+    textShadowRadius: 3,
+    textShadowOffset: { width: -1, height: 2 },
+  },
 });
