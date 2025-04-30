@@ -1,0 +1,26 @@
+{
+  "cli": {
+    "version": ">= 16.2.1",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "android": {
+        "gradleCommand": ":app:assembleDebug -PapplyCustomGradle=true"
+      }
+    },
+    "preview": {
+      "android": {
+        "gradleCommand": ":app:assembleRelease -PapplyCustomGradle=true"
+      }
+    },
+    "production": {
+      "android": {
+        "gradleCommand": ":app:assembleRelease -PapplyCustomGradle=true"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

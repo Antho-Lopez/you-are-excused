@@ -1,20 +1,20 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import * as Localization from 'expo-localization';
-import fr from '@/locales/fr'; 
-import en from '@/locales/en';
+    import i18n from 'i18next';
+    import { initReactI18next } from 'react-i18next';
+    import * as Localization from 'expo-localization';
+    import fr from '@/locales/fr'; 
+    import en from '@/locales/en';
 
-i18n.use(initReactI18next).init({
-    resources: {
-        fr: { translation: fr },
-        en: { translation: en },
-    },
-    // lng: 'en',
-    lng: Localization.getLocales()[0].languageCode || 'en', 
-    fallbackLng: 'fr', 
-    interpolation: {
-        escapeValue: false,
-    },
-});
+    i18n.use(initReactI18next).init({
+        resources: {
+            fr: { translation: fr },
+            en: { translation: en },
+        },
+        // lng: 'en',
+        lng: Localization.getLocales()[0].languageCode || 'en', 
+        fallbackLng: 'fr', 
+        interpolation: {
+            escapeValue: false,
+        },
+    });
 
-export default i18n;
+    export default i18n;

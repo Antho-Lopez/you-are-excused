@@ -5,6 +5,7 @@ import { excusesBilingue } from '@/constants/excuses';
 import i18n from '@/utils/i18n';
 import { useTranslation } from 'react-i18next';
 import { Link } from "expo-router";
+import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 
 export default function Index() {
   const [excuse, setExcuse] = useState('');
@@ -67,6 +68,12 @@ export default function Index() {
           </TouchableOpacity>
 
         </View>
+
+        <BannerAd
+          unitId={TestIds.BANNER}  // Utilise TestIds.BANNER pendant le développement, change avec ton propre ID en production
+          size={BannerAdSize.FULL_BANNER}
+          onAdFailedToLoad={(error) => console.error("Ad failed to load", error)}
+        />
       </View>
     </SafeAreaView>
   );

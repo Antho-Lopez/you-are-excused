@@ -7,7 +7,7 @@ import '@/utils/i18n';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-
+  
   const [loaded] = useFonts({
     LuckiestGuy: require('@/assets/fonts/LuckiestGuy-Regular.ttf'),
   });
